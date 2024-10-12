@@ -16,6 +16,7 @@ const errorNode = div.appendChild(document.createTextNode(""))
 let client_id
 let domain
 let auth0
+let claims
 
 const logout = async () => {
   auth0.logout({ returnTo: getOriginUrl() })
@@ -81,11 +82,12 @@ const login = async () => {
   button.addEventListener('click', logout)
 }
 
-
-const claims = await auth0.checkSession();
+claims = await auth0.checkSession();
+console.log(claims)
 
 function onRender(event) {
   const data = event.detail
+
 
   client_id = data.args["client_id"]
   domain = data.args["domain"]
