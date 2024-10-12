@@ -81,24 +81,24 @@ const login = async () => {
   button.addEventListener('click', logout)
 }
 
+
 const claims = await auth0.checkSession();
-
-if (claims) {
-  button.textContent = "Logout"
-  button.removeEventListener('click', login)
-  button.addEventListener('click', logout)
-  console.log("User logged in")
-} else {
-  button.onclick = login
-  console.log('User not logged in')
-}
-
 
 function onRender(event) {
   const data = event.detail
 
   client_id = data.args["client_id"]
   domain = data.args["domain"]
+
+  if (claims) {
+    button.textContent = "Logout"
+    button.removeEventListener('click', login)
+    button.addEventListener('click', logout)
+    console.log("User logged in")
+  } else {
+    button.onclick = login
+    console.log('User not logged in')
+  }
 
   Streamlit.setFrameHeight()
 }
