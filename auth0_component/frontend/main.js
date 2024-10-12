@@ -83,7 +83,7 @@ const login = async () => {
 }
 
 claims = await auth0.checkSession();
-console.log(claims)
+console.log(claims);
 
 function onRender(event) {
   const data = event.detail
