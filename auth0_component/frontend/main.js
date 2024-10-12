@@ -16,7 +16,7 @@ const errorNode = div.appendChild(document.createTextNode(""))
 let client_id
 let domain
 let auth0
-let claims
+let button_text
 
 const logout = async () => {
   auth0.logout({ returnTo: getOriginUrl() })
@@ -85,6 +85,8 @@ const login = async () => {
 claims = await auth0.checkSession();
 console.log(claims);
 
+button.onclick = login
+
 function onRender(event) {
   const data = event.detail
 
@@ -92,15 +94,9 @@ function onRender(event) {
   client_id = data.args["client_id"]
   domain = data.args["domain"]
 
-  if (claims) {
-    button.textContent = "Logout"
-    button.removeEventListener('click', login)
-    button.addEventListener('click', logout)
-    console.log("User logged in")
-  } else {
-    button.onclick = login
-    console.log('User not logged in')
-  }
+  button_text = data.args['button_text']
+
+  button.textContent = button_text
 
   Streamlit.setFrameHeight()
 }
