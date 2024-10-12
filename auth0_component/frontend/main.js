@@ -87,8 +87,10 @@ if (claims) {
   button.textContent = "Logout"
   button.removeEventListener('click', login)
   button.addEventListener('click', logout)
+  console.log("User logged in")
 } else {
   button.onclick = login
+  console.log('User not logged in')
 }
 
 
